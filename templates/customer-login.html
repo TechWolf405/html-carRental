@@ -3,9 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BMC - customer login</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <h1> work in progress sadge pls check other meanwhile</h1>
+    <div class="customer-header">
+        <h1>BOOK MY CAR</h1><br>
+        <div class="sign-up">
+            <h2 style="font-size: large;">SIGN UP</h2>
+            <form id="signup-form">
+                <div class="form">
+                    <label for="name">NAME:</label><br>
+                    <input class="inputboxes" type="text" id="name" name="name" required><br><br>
+
+                    <label for="email">EMAIL:</label><br>
+                    <input class="inputboxes" type="text" id="email" name="email" required><br><br>
+
+                    <label for="phoneno">PHONE NO:</label><br>
+                    <input class="inputboxes" type="number" id="phoneno" name="phoneno" required><br><br>
+                </div>
+                <input class="submitbutton" type="submit" value="Submit">
+            </form>
+        </div><br>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const formData = new FormData(this);
+
+            // Send form data to FastAPI endpoint change the url
+            fetch('http://your-fastapi-endpoint/submit_form', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle successful response here
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle errors here
+            });
+        });
+    </script>
 </body>
 </html>

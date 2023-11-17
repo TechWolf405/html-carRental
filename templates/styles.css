@@ -13,22 +13,41 @@
 
 .logostyling {
     text-align: center;
+    background-color: #023047;
+    fill: #023047;
 }
 
 .submitbutton {
     font-size: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
+    color: #219ebc;
+    background-color: #023047;
 }
 
 .inputboxes {
     font-size: 20px;
 }
+
+#button-style{
+
+  background-color: #219ebc;
+  font-style: italic;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration:solid;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 /*----------------------- index.html stuff ---------------------------------------------------*/
 
 .indexheader {
     text-align: center;
-    color:#142d4c;
+    color: antiquewhite;
     font-size: 30px;
 }
 
@@ -78,4 +97,30 @@
     font-size: 20px;
     color: #142d4c; 
     font-weight: bold; 
+}
+
+/*----------------- createcustomer.html ---------------------------------------------------*/
+
+.customer-header{
+    background-color: #023047;
+    text-align: left;
+    color: antiquewhite;
+    padding: 20px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.sign-up{
+    margin-left: 30px;
+    padding-top: 10px;
+    padding-left: 20px;
+    width: 350px;
+    height: 350px;
+    background-color: antiquewhite;
+    font-style: bold;
+    color: #219ebc;
+}
+
+.form{
+    text-align: left;
+    margin-left: 20px;
 }
