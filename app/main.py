@@ -27,11 +27,11 @@ db =get_db()
 # @app.get('/')
 # def name(request :Request):
 #     return templates.TemplateResponse("front.html",{"request":request,"name":"No name"})
-def get_all_posts():
-    try:
-        return db.query(Post).all()
-    finally:
-        db.close()
+# def get_all_posts():
+#     try:
+#         return db.query(Post).all()
+#     finally:
+#         db.close()
 
 @app.get('/')
 def root(request: Request):
@@ -122,3 +122,26 @@ def read_posts(request: Request,db:Session = Depends(get_db)):
 def show_car(request: Request,db:Session = Depends(get_db)):
     cars = db.query(models.Car).all()
     return {"data" : cars}
+
+@app.delete('/deletecar/{id}',status_code=status.HTTP_204_NO_CONTENT)
+def delete_car(request: Request ,id: int, db:Session = Depends(get_db)):
+    cars = db.query(models.Car).filter(models.Car.car_id == id).first()
+    if cars == None:
+        raise HTTPException ( status_code=status.HTTP_404_NOT_FOUND,
+        detail = f"post with id: {id} does not exist")
+        
+    db.delete(cars)
+    db.commit()
+    return {"data": "Delete successfull"}
+
+# @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
+# def delete_post(id: int,db:Session = Depends(get_db)):
+
+#     post = db.query(models.Post).filter(models.Post.id == id).first()
+#     if post == None:
+#         raise HTTPException ( status_code=status . HTTP_404_NOT_FOUND,
+#         detail = f"post with id: {id} does not exist")
+        
+#     db.delete(post)
+#     db.commit()
+#     return {"data": "Delete successfull"}
