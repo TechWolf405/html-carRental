@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Car</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Create New Car</h1>
+    <form method="post" action='/submit_car'>
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" required><br><br>
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required><br><br>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required><br><br>
+
+        <label for="rental_rate_per_day">Rental Rate Per Day:</label>
+        <input type="number" id="rental_rate_per_day" name="rental_rate_per_day" step="0.01" required><br><br>
+
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option value="1">Available</option>
+            <option value="0">Not Available</option>
+        </select><br><br>
+
+        <input type="submit" value="Create Car">
+    </form>
+</body>
+</html>
