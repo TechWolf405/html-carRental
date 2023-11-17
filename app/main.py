@@ -2,7 +2,7 @@ import re
 from typing import Optional
 from fastapi import FastAPI, Form, Response, status, HTTPException,Depends,Request
 from fastapi.params import Body
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from random import randrange
 import mysql.connector as connector
@@ -39,43 +39,43 @@ def root(request: Request):
 
 
 
-# @app.post('/create_car')
-# def create_car(car: schemas.CarBase, db: Session = Depends(get_db)):
-#     # Process the form data (car) and save it to the database
-#     new_car = models.Car(**car.model_dump())
+@app.post('/create_car')
+def create_car(car: schemas.CarBase, db: Session = Depends(get_db)):
+    # Process the form data (car) and save it to the database
+    new_car = models.Car(**car.model_dump())
     
-#     # Your database logic goes here
-#     db.add(new_car)
-#     db.commit()
-#     db.refresh(new_car)
-#     # For demonstration purposes, just return the received data
-#     return None
-
-@app.get('/create_car',response_class=HTMLResponse)
-def home(request:Request ):
-    return templates.TemplateResponse("createcar.html", {"request":request})\
-
-@app.route('/submit_car', methods=['POST'])
-async def handle_car(
-    request: Request
-
-):
-    form = await request.form()
-     
-    db:Session = Depends(get_db)
-    # db.add(new_car)
-    # db.commit()
-    # db.refresh(new_car)
-    car = schemas.CarBase(**dict(form))
-    car_dict = car.model_dump()
-    car_dict['car_id'] = 23
-    new_car = models.Car(**car_dict)
+    # Your database logic goes here
     db.add(new_car)
     db.commit()
-    db.refresh()
-    return {
-            dict(form)
-    }
+    db.refresh(new_car)
+    # For demonstration purposes, just return the received data
+    return {"Data" : "Successful"}
+
+@app.get('/create_car',response_class=JSONResponse)
+def home(request:Request ):
+    return templates.TemplateResponse("createcar.html", {"request":request})
+
+# @app.route('/submit_car', methods=['POST'])
+# async def handle_car(
+#     request: Request
+
+# ):
+#     form = await request.form()
+     
+#     db:Session = Depends(get_db)
+#     # db.add(new_car)
+#     # db.commit()
+#     # db.refresh(new_car)
+#     car = schemas.CarBase(**dict(form))
+#     car_dict = car.model_dump()
+#     car_dict['car_id'] = 23
+#     new_car = models.Car(**car_dict)
+#     db.add(new_car)
+#     db.commit()
+#     db.refresh()
+#     return {
+#             dict(form)
+#     }
     
 
     
@@ -116,3 +116,9 @@ def read_posts(request: Request,db:Session = Depends(get_db)):
     
     posts = db.query(models.Post).all()
     return templates.TemplateResponse("posts.html", {"request": request, "posts": posts})
+
+
+@app.get('/showcar')
+def show_car(request: Request,db:Session = Depends(get_db)):
+    cars = db.query(models.Car).all()
+    return {"data" : cars}
