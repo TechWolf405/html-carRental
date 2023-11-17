@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Car</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body class="body">
+    <h1 class="deletecarheader">Enter Vehicle ID to Delete:</h1>
+    <img src="../img/deletecar.png" height="150" width="150"> <br> <br>
+    <form id="deleteCarForm" method="post" action="#">
+        <label class="VehicleID" for="vehicleId">Vehicle ID:</label>
+        <input class="inputboxes" type="number" id="vehicleId" name="vehicleId" required><br><br>
+
+        <input class="submitbutton" type="submit" value="Delete Car">
+    </form>
+
+
+
+
+<!-- WARNING!!!!!!! BELOW IS AI GENERATED -->
+    <script>
+        document.getElementById('deleteCarForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Retrieve the entered vehicle ID
+            const enteredVehicleId = parseInt(document.getElementById('vehicleId').value);
+
+            // Send a DELETE request to the FastAPI endpoint
+            fetch(`/delete_car/${enteredVehicleId}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Display success message or handle response
+                    // You can add further logic here based on the server response
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+    <!-- READ ABOVE COMMENT -->
+</body>
+
+</html>
