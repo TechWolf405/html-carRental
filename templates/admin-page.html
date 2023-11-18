@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
 </head>
 
 <body class="body">
     <h1 class="adminheader"> Welcome to admin dashboard, {{ name }}! </h1>
 
     <div class="logostyling adminlogostyling"> 
-        <img src="../img/adminpage.png" height="200" width="200"> <br>
+        <img src="{{ url_for('static', path='adminpage.png') }}" height="200" width="200"> <br>
     </div> 
     <h2 class="adminheader"> What do you want to do today? </h2>
     <ul>
         <div class="login-options">
-            <li> <a href="createcar.html"> Add a vehicle to the inventory (Create Car). </a></li><br>
-            <li> <a href="deletecar.html"> Delete records of a vehicle from the inventory. </a></li><br>
-            <li> <a href="updatecar.html"> Update records of an existing vehicle from the inventory. </a></li>
+            <li> <a href="create_car"> Add a vehicle to the inventory (Create Car). </a></li>
+            <li> <a href="deletecar"> Delete records of a vehicle from the inventory. </a></li>
+            <li> <a href="updatecar"> Update records of an existing vehicle from the inventory. </a></li>
+            <li> <a href="showcar"> Show records of an existing vehicle from the inventory. </a></li>
         </div>
     </ul>
 </body>

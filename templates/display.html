@@ -1,21 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Details</title>
+    <title>Show Car Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e5e5e5;
+        }
+
+        .available {
+            color: green;
+        }
+
+        .unavailable {
+            color: red;
+        }
+    </style>
 </head>
-<!--ai generated-->
+
 <body>
-    <div id="carDetails">
-        {% for car in carDetails %}
-            <div>
-                <h2>{{ car.make }} {{ car.model }} ({{ car.year }})</h2>
-                <p>Rental Rate Per Day: {{ car.rental_rate_per_day }}</p>
-                <p>Availability: {{ "Available" if car.availability else "Not Available" }}</p>
-                <hr>
-            </div>
-        {% endfor %}
-    </div>
+    <h1>Car Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Rental Rate per Day</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.car_id }}</td>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>₹{{ car.rental_rate_per_day }}</td>
+                <td class="{{ 'available' if car.availability else 'unavailable' }}">
+                    {{ "Available" if car.availability else "Not Available" }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
+
 </html>

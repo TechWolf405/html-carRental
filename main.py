@@ -13,6 +13,7 @@ from . import models,schemas
 from .database import engine,get_db
 from .schemas import Post
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 models.Base.metadata.create_all(bind = engine)
 
 
@@ -20,6 +21,8 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="app/templates/static"), name="static")
 
 db =get_db()
 
@@ -33,9 +36,22 @@ db =get_db()
 #     finally:
 #         db.close()
 
-@app.get('/')
+@app.get('/',response_class=HTMLResponse)
 def root(request: Request):
-    return templates.TemplateResponse("base.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get('/adminpage')
+def admin(request:Request):
+    return  templates.TemplateResponse("admin-page.html", {"request": request})
+@app.get('/customerlogin')
+def admin(request:Request):
+    return  templates.TemplateResponse("customer-login.html", {"request": request})
+
+
+@app.get('/deletecar',response_class=JSONResponse )
+def deletecar(request:Request):
+    return templates.TemplateResponse("deletecar.html", {"request" : request})
+
 
 
 
@@ -118,12 +134,12 @@ def read_posts(request: Request,db:Session = Depends(get_db)):
     return templates.TemplateResponse("posts.html", {"request": request, "posts": posts})
 
 
-@app.get('/showcar')
+@app.get('/showcar',response_class=HTMLResponse)
 def show_car(request: Request,db:Session = Depends(get_db)):
     cars = db.query(models.Car).all()
-    return {"data" : cars}
+    return templates.TemplateResponse("display.html", {"request":request, "cars":cars})
 
-@app.delete('/deletecar/{id}',status_code=status.HTTP_204_NO_CONTENT)
+@app.delete('/delete_car/{id}',status_code=status.HTTP_204_NO_CONTENT)
 def delete_car(request: Request ,id: int, db:Session = Depends(get_db)):
     cars = db.query(models.Car).filter(models.Car.car_id == id).first()
     if cars == None:
@@ -134,14 +150,22 @@ def delete_car(request: Request ,id: int, db:Session = Depends(get_db)):
     db.commit()
     return {"data": "Delete successfull"}
 
-# @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
-# def delete_post(id: int,db:Session = Depends(get_db)):
 
-#     post = db.query(models.Post).filter(models.Post.id == id).first()
-#     if post == None:
-#         raise HTTPException ( status_code=status . HTTP_404_NOT_FOUND,
-#         detail = f"post with id: {id} does not exist")
-        
-#     db.delete(post)
-#     db.commit()
-#     return {"data": "Delete successfull"}
+@app.get('/updatecar' , response_class=HTMLResponse)
+def update_car(request:Request , db:Session = Depends(get_db)):
+    return templates.TemplateResponse("updatecar.html", {"request":request})
+    
+
+
+@app.put("/update_car/{id}")
+def update_post(id:int,Car: schemas.CarBase, db: Session = Depends(get_db)):
+    cars_query = db.query(models.Car).filter(models.Car.car_id == id)
+    car = cars_query.first()
+    
+    if car == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail = f"post with id: {id} does not exist")
+    
+    cars_query.update({**Car.model_dump()},synchronize_session=False)
+    db.commit()
+    return {"data" : 'successful'}

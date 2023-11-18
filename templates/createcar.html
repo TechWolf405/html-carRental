@@ -1,46 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Create New Car</title>
-    <link rel="stylesheet" href="./styles.css">
 </head>
-
-<body class="customer-header">
-    <h1 class="customer-header" style="color: aqua;"> Fill details of a new vehicle to add to the inventory: </h1>
-    <img src="../img/createcar.png" height="150" width="150"> <br> <br>
-    <div class="sign-up">
-    <form id="carForm" method="post" action="#">
-        <label for="make"> Make: </label>
-        <input class="inputboxes" type="text" id="make" name="make" required><br><br>
+<body>
+    <h1>Create New Car</h1>
+    <form id="carForm" method="post" action= "#">
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" required><br><br>
 
         <label for="model">Model:</label>
-        <input class="inputboxes" type="text" id="model" name="model" required><br><br>
+        <input type="text" id="model" name="model" required><br><br>
 
         <label for="year">Year:</label>
-        <input class="inputboxes" type="number" id="year" name="year" required><br><br>
+        <input type="number" id="year" name="year" required><br><br>
 
         <label for="rental_rate_per_day">Rental Rate Per Day:</label>
-        <input class="inputboxes" type="number" id="rental_rate_per_day" name="rental_rate_per_day" step="0.01" required><br><br>
+        <input type="number" id="rental_rate_per_day" name="rental_rate_per_day" step="0.01" required><br><br>
 
         <label for="availability">Availability:</label>
-        <select class="inputboxes" id="availability" name="availability" required>
+        <select id="availability" name="availability" required>
             <option value="1">Available</option>
             <option value="0">Not Available</option>
         </select><br><br>
 
-        <input class="submitbutton" type="submit" value="Add vehicle record">
+        <input type="submit" value="Create Car">
     </form>
-    </div>
 
-
-
-<!-- WARNING!!!!!!! BELOW code IS AI GENERATED -->
     <script>
-        document.getElementById('carForm').addEventListener('submit', function (event) {
+        document.getElementById('carForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
+        
             // Create a plain JavaScript object
             const carData = {
                 make: document.getElementById('make').value,
@@ -49,7 +40,7 @@
                 rental_rate_per_day: parseFloat(document.getElementById('rental_rate_per_day').value),
                 availability: parseInt(document.getElementById('availability').value),
             };
-
+        
             // Send a POST request to the FastAPI endpoint
             fetch('/create_car', {
                 method: 'POST',
@@ -58,23 +49,17 @@
                 },
                 body: JSON.stringify(carData)
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Display success message or handle response
-                    // You can add further logic here based on the server response
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Display success message or handle response
+                // You can add further logic here based on the server response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
+        
+
     </script>
-<!-- READ ABOVE COMMENT -->
-
-
-
-
-
-
 </body>
-
 </html>

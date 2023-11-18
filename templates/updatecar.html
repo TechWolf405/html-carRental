@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Car</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
 </head>
 
 <body class="customer-header">
     <h1 class="updatecarheader">Enter Vehicle ID and Update Details:</h1>
-    <img src="../img/updatecar.png" height="150" width="150"> <br> <br>
+    <img src="{{ url_for('static', path='updatecar.png') }}" height="150" width="150"> <br> <br>
     <div class="sign-up">
     <form id="updateCarForm" method="post" action="#">
         <label class="updatecartext" for="vehicleId">Vehicle ID:</label>

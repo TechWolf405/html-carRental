@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete Car</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
 </head>
 
 <body class="body">
     <h1 class="deletecarheader">Enter Vehicle ID to Delete:</h1>
-    <img src="../img/deletecar.png" height="150" width="150"> <br> <br>
+    <img src="{{ url_for('static', path='deletecar.png') }}" height="150" width="150"> <br> <br>
     <form id="deleteCarForm" method="post" action="#">
         <label class="VehicleID" for="vehicleId">Vehicle ID:</label>
         <input class="inputboxes" type="number" id="vehicleId" name="vehicleId" required><br><br>

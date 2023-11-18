@@ -17,7 +17,7 @@ class Car(Base):
 class Customer(Base):
     __tablename__ = "Customers"
     
-    customer_id = Column(Integer, primary_key=True, nullable=False)
+    customer_id = Column(Integer, primary_key=True, nullable=False,autoincrement="auto")
     name = Column(String(length=255), nullable=False)
     email = Column(String(length=255), nullable=False)
     phone = Column(String(length=20), nullable=False)
