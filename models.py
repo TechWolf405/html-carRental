@@ -25,7 +25,7 @@ class Customer(Base):
 class Rental(Base):
     __tablename__ = "Rentals"
     
-    rental_id = Column(Integer, primary_key=True, nullable=False)
+    rental_id = Column(Integer, primary_key=True, nullable=False,autoincrement="auto")
     car_id = Column(Integer, ForeignKey('Cars.car_id'), nullable=False)
     customer_id = Column(Integer, ForeignKey('Customers.customer_id'), nullable=False)
     rental_start_date = Column(DateTime, nullable=False, server_default=text('now()'))

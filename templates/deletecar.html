@@ -20,22 +20,18 @@
 
 
 
-<!-- WARNING!!!!!!! BELOW IS AI GENERATED -->
     <script>
         document.getElementById('deleteCarForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
-            // Retrieve the entered vehicle ID
             const enteredVehicleId = parseInt(document.getElementById('vehicleId').value);
 
-            // Send a DELETE request to the FastAPI endpoint
             fetch(`/delete_car/${enteredVehicleId}`, {
                 method: 'DELETE',
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Display success message or handle response
-                    // You can add further logic here based on the server response
+                    console.log(data);
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -43,7 +39,6 @@
         });
     </script>
 
-    <!-- READ ABOVE COMMENT -->
 </body>
 
 </html>
