@@ -32,7 +32,7 @@
         document.getElementById('carForm').addEventListener('submit', function(event) {
             event.preventDefault();
         
-            // Create a plain JavaScript object
+
             const carData = {
                 make: document.getElementById('make').value,
                 model: document.getElementById('model').value,
@@ -51,8 +51,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Display success message or handle response
-                // You can add further logic here based on the server response
+                console.log(data); 
             })
             .catch(error => {
                 console.error('Error:', error);

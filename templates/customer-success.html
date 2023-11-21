@@ -29,12 +29,12 @@
 
     <script>
         document.getElementById('signup-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); 
 
-            // Get form data
+
             const formData = new FormData(this);
 
-            // Send form data to FastAPI endpoint change the url
+
             fetch('/customer', {
                 method: 'POST',
                 body: formData
