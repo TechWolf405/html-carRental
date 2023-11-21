@@ -8,7 +8,8 @@
     <h1>Create New Car</h1>
     <form id="carForm" method="post" action= "#">
         <label for="make">Make:</label>
-        <input type="text" id="make" name="make" required><br><br>
+        <input type="text" id="make" name="make" pattern="[A-Za-z\s]+" title="Please enter only alphabetic characters and spaces" required><br><br>
+
 
         <label for="model">Model:</label>
         <input type="text" id="model" name="model" required><br><br>
@@ -41,7 +42,7 @@
                 availability: parseInt(document.getElementById('availability').value),
             };
         
-            // Send a POST request to the FastAPI endpoint
+            // Sent a POST request to the FastAPI endpoint
             fetch('/create_car', {
                 method: 'POST',
                 headers: {

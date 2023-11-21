@@ -16,7 +16,8 @@
         <input class="inputboxes" type="number" id="vehicleId" name="vehicleId" required><br><br>
 
         <label class="updatecartext" for="make"> Make: </label>
-        <input class="inputboxes" type="text" id="make" name="make" required><br><br>
+        <input class="inputboxes" type="text" id="make" name="make" pattern="[A-Za-z\s]+" title="Please enter only alphabetic characters and spaces" required><br><br>
+        
 
         <label class="updatecartext" for="model">Model:</label>
         <input class="inputboxes" type="text" id="model" name="model" required><br><br>
@@ -39,7 +40,7 @@
 
 
 
-<!-- WARNING!!!!!!! BELOW IS AI GENERATED -->
+
     <script>
         document.getElementById('updateCarForm').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -64,8 +65,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Display success message or handle response
-                    // You can add further logic here based on the server response
+                    console.log(data); 
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -73,7 +73,6 @@
         });
     </script>
 
-    <!-- READ ABOVE COMMENT -->
 </body>
 
 </html>

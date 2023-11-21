@@ -1,7 +1,7 @@
 document.getElementById('carForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Create a plain JavaScript object
+    // Created a plain JavaScript object
     const carData = {
         make: document.getElementById('make').value,
         model: document.getElementById('model').value,
@@ -10,7 +10,7 @@ document.getElementById('carForm').addEventListener('submit', function(event) {
         availability: parseInt(document.getElementById('availability').value),
     };
 
-    // Send a POST request to the FastAPI endpoint
+    // Sent a POST request to the FastAPI endpoint
     fetch('/submit_car', {
         method: 'POST',
         headers: {
@@ -20,8 +20,7 @@ document.getElementById('carForm').addEventListener('submit', function(event) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); // Display success message or handle response
-        // You can add further logic here based on the server response
+        console.log(data); 
     })
     .catch(error => {
         console.error('Error:', error);

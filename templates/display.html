@@ -70,7 +70,7 @@
                 <td>{{ car.make }}</td>
                 <td>{{ car.model }}</td>
                 <td>{{ car.year }}</td>
-                <td>₹{{ car.rental_rate_per_day }}</td>
+                <td>${{ car.rental_rate_per_day }}</td>
                 <td class="{{ 'available' if car.availability else 'unavailable' }}">
                     {{ "Available" if car.availability else "Not Available" }}
                 </td>

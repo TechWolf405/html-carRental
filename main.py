@@ -17,12 +17,12 @@ from fastapi.staticfiles import StaticFiles
 models.Base.metadata.create_all(bind = engine)
 
 
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="html-carRental/templates")
 
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="app/templates/static"), name="static")
+app.mount("/static", StaticFiles(directory="html-carRental/templates\static"), name="static")
 
 db =get_db()
 
@@ -101,6 +101,7 @@ def delete_car(request: Request ,id: int, db:Session = Depends(get_db)):
     db.delete(cars)
     db.commit()
     return {"data": "Delete successfull"}
+    
 
 
 @app.get('/updatecar' , response_class=HTMLResponse)

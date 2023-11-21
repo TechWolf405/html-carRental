@@ -32,18 +32,10 @@ class Rental(Base):
     rental_end_date = Column(DateTime, nullable=False)
     total_cost = Column(Float, nullable=False)
 
-    # Define relationships
+    # Defined relationships
     car = relationship("Car", back_populates="rentals")
     customer = relationship("Customer", back_populates="rentals")
 
-# Additional relationships for bi-directional access
+
 Car.rentals = relationship("Rental", order_by=Rental.rental_id, back_populates="car")
 Customer.rentals = relationship("Rental", order_by=Rental.rental_id, back_populates="customer")
-class Post(Base):
-    __tablename__ = "Post"
-    
-    id = Column(Integer , primary_key=True , nullable=False)
-    title = Column(String(length=255), nullable=False)
-    content = Column(String(length=255), nullable=False)
-    published = Column(Boolean,default=True, nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True),nullable = False , server_default=text('now()'))
